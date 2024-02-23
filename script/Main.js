@@ -10,7 +10,6 @@ class Main {
         this.Snake = new Snake();
         this.Score = new Score(0);
     }
-
     update() {
         //обновление данных при изменении
     }
@@ -19,5 +18,7 @@ class Main {
         //отрисовка всех частей игры
     }
 }
+
+const newMain = new Main();
 
 export default Main;

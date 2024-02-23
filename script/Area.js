@@ -1,31 +1,27 @@
 class Area {
     constructor() {
-
-    } 
-    //отрисовка игрового поля
-    document.addEventListener('DOMContentLoaded', function () {
-        const parent = document.querySelector(".body");
-        parent.innerHTML += '<div class="area"></div>';
-        const area = document.querySelector(".area");
-
+        this.body = document.querySelector(".body");
+        this.body.innerHTML += '<div class="area"></div>';
+        this.area = document.querySelector(".area");
+        //отрисовка игрового поля
         for (let i = 1; i <= 100; i++) {
-            area.innerHTML += '<div class="cell"></div>'
+            this.area.innerHTML += '<div class="cell"></div>'
         }
     
-        const cell = document.querySelectorAll(".cell");
-        let x = 1;
-        let y = 10;
+        this.cell = document.querySelectorAll(".cell");
+        this.x = 1;
+        this.y = 10;
     
-        for (let i = 0; i < cell.length; i++) {
-            if(x > 10) {
-                x = 1;
-                y--;
+        for (let i = 0; i < this.cell.length; i++) {
+            if(this.x > 10) {
+                this.x = 1;
+                this.y--;
             }
-            cell[i].setAttribute('position-X', x);
-            cell[i].setAttribute('position-Y', y);
-            x++;
-        }
-    });
+            this.cell[i].setAttribute('position-X', this.x);
+            this.cell[i].setAttribute('position-Y', this.y);
+            this.x++;
+        } 
+    };
 }
 
 export default Area;
