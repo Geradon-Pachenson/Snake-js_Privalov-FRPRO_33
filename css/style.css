@@ -45,3 +45,20 @@ body {
     background-repeat: no-repeat;
     background-position: center;
 }
+
+.snakeBody {
+    background-color: aqua;
+    border-radius: 50%;
+}
+
+.snakeHead {
+    background-color: aqua;
+    border-radius: 30%;
+}
+
+.rabbit {
+    background-image: url(../images/svg//rabbit_bunny_animal_wildlife_mammal_rodent_icon_141989.svg);
+    background-size: 90%;
+    background-repeat: no-repeat;
+    background-position: center;
+}

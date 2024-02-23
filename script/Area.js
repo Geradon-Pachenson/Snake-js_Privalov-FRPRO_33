@@ -17,8 +17,8 @@ class Area {
                 this.x = 1;
                 this.y--;
             }
-            this.cell[i].setAttribute('position-X', this.x);
-            this.cell[i].setAttribute('position-Y', this.y);
+            this.cell[i].setAttribute('positionX', this.x);
+            this.cell[i].setAttribute('positionY', this.y);
             this.x++;
         } 
     };
