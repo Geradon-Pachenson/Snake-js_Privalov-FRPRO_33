@@ -49,11 +49,13 @@ body {
 .snakeBody {
     background-color: aqua;
     border-radius: 50%;
+    background-image: none;
 }
 
 .snakeHead {
     background-color: aqua;
     border-radius: 30%;
+    background-image: none;
 }
 
 .rabbit {

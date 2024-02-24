@@ -10,6 +10,7 @@ class Main {
         this.EatPont = new EatPont();
         this.Score = new Score(0);
     }
+
     update() {
         //обновление данных при изменении
     }
