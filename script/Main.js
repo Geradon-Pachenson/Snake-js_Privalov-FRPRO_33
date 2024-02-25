@@ -1,13 +1,13 @@
 import Area from "./Area.js";
 import Snake from "./Snake.js";
 import Score from "./Score.js";
-import EatPont from "./EatPont.js";
+import EatPoint from "./EatPoint.js";
 
 class Main {
     constructor() {
         this.area = new Area();
         this.Snake = new Snake();
-        this.rabbit = new EatPont();
+        this.rabbit = new EatPoint();
         this.Score = new Score(0);
     }
 
