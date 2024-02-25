@@ -5,9 +5,9 @@ import EatPont from "./EatPont.js";
 
 class Main {
     constructor() {
-        this.Area = new Area();
+        this.area = new Area();
         this.Snake = new Snake();
-        this.EatPont = new EatPont();
+        this.rabbit = new EatPont();
         this.Score = new Score(0);
     }
 
@@ -17,9 +17,12 @@ class Main {
 
     draw() {
         //отрисовка всех частей игры
+        //this.area.draw();
+        this.rabbit.draw();
     }
 }
 
 const newMain = new Main();
+newMain.draw();
 
 export default Main;

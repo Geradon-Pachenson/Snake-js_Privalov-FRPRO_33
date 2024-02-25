@@ -21,7 +21,11 @@ class Area {
             this.cell[i].setAttribute('positionY', this.y);
             this.x++;
         } 
-    };
+    }
+
+    draw() {
+        //отрисовка игрового поля
+    }
 }
 
 export default Area;
