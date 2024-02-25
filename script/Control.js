@@ -18,7 +18,6 @@ export default class Control {
         if ((e.code === 'KeyA' || e.code === 'ArrowLeft') && this.direction !== 'right') {
             this.direction = 'left';
         }
-    });
-        console.log(this.direction);
+        });
     }
 }
