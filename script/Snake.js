@@ -1,11 +1,11 @@
 import CoordRandom from "./CoordRandom.js";
-import Control from "./Control.js";
-
-class Snake {
-    constructor() {
+import Control from "./Control.js"
+class Snake extends Control {
+    constructor(direction) {
+        super(direction);
         this.CoordRandom = new CoordRandom();
         this.coordinates = this.CoordRandom.coordSnake ();
-        this.controlSnake = new Control('right');
+        this.direction = 'right';
                 
         //исправляем ошибку если приходит x координата = 1(вторая клетка тела не может иметь координату x = 0)
         if(this.coordinates[0] === 1) {
@@ -22,6 +22,10 @@ class Snake {
         //Добавляем голове змеи класс snakeHead 
         this.snakeBody[0].classList.add('snakeHead');
     }
+    
+    create() {
+
+    }
 
     //Перемещение змеи
     //Создаем функцию с интервалом вызова 0.5 сек
@@ -34,10 +38,8 @@ class Snake {
         this.snakeBody[this.snakeBody.length - 1].classList.remove('snakeBody');
         //Временно удаляем последний элемент из массива со змеей
         this.snakeBody.pop();
-
-        this.Control.setControls();
         
-        //console.log(this.direction);
+        this.setControl();
 
         if (this.direction === 'right') {
              //Условие "отзеркаливания"
@@ -90,5 +92,4 @@ class Snake {
     }
 
 }
-
 export default Snake;
