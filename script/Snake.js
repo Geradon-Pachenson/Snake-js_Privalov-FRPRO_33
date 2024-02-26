@@ -6,7 +6,11 @@ class Snake extends Control {
         this.CoordRandom = new CoordRandom();
         this.coordinates = this.CoordRandom.coordSnake ();
         this.direction = 'right';
-                
+        this.create();        
+        
+    }
+    
+    create() {
         //исправляем ошибку если приходит x координата = 1(вторая клетка тела не может иметь координату x = 0)
         if(this.coordinates[0] === 1) {
             this.coordinates[0] += 1;
@@ -22,16 +26,12 @@ class Snake extends Control {
         //Добавляем голове змеи класс snakeHead 
         this.snakeBody[0].classList.add('snakeHead');
     }
-    
-    create() {
-
-    }
 
     //Перемещение змеи
     //Создаем функцию с интервалом вызова 0.5 сек
     move = setInterval(() => {
         //Находим координаты головы змеи
-        this.headCoordinates = [this.snakeBody[0].getAttribute('positionX'), this.snakeBody[0].getAttribute('positionY')];
+        const headCoordinates = [this.snakeBody[0].getAttribute('positionX'), this.snakeBody[0].getAttribute('positionY')];
         //Удаляем класс snakeHead у головы
         this.snakeBody[0].classList.remove('snakeHead');
         //Удаляем класс snakeBody у последнего элемента змеи
@@ -43,35 +43,35 @@ class Snake extends Control {
 
         if (this.direction === 'right') {
              //Условие "отзеркаливания"
-            if (this.headCoordinates[0] < 10) {
+            if (headCoordinates[0] < 10) {
                 //Добавляем на первое место массива ячейку с координатой x+1 относительно положения головы
-                this.snakeBody.unshift(document.querySelector('[positionX = "' + (+this.headCoordinates[0] + 1) + '"][positionY = "' + this.headCoordinates[1] + '"]'));
+                this.snakeBody.unshift(document.querySelector('[positionX = "' + (+ headCoordinates[0] + 1) + '"][positionY = "' + headCoordinates[1] + '"]'));
             } else {
-                this.snakeBody.unshift(document.querySelector('[positionX = "1"][positionY = "' + this.headCoordinates[1] + '"]'));
+                this.snakeBody.unshift(document.querySelector('[positionX = "1"][positionY = "' + headCoordinates[1] + '"]'));
             }
         } else if (this.direction === 'left') {
                 //Условие "отзеркаливания" при движении влево
-            if (this.headCoordinates[0] > 1) {
+            if (headCoordinates[0] > 1) {
                 //Добавляем на первое место массива ячейку с координатой x-1 относительно положения головы
-                this.snakeBody.unshift(document.querySelector('[positionX = "' + (+this.headCoordinates[0] - 1) + '"][positionY = "' + this.headCoordinates[1] + '"]'));
+                this.snakeBody.unshift(document.querySelector('[positionX = "' + (+ headCoordinates[0] - 1) + '"][positionY = "' + headCoordinates[1] + '"]'));
             } else {
-                this.snakeBody.unshift(document.querySelector('[positionX = "10"][positionY = "' + this.headCoordinates[1] + '"]'));
+                this.snakeBody.unshift(document.querySelector('[positionX = "10"][positionY = "' + headCoordinates[1] + '"]'));
             }
         } else if (this.direction ==='up') {
             //Условие "отзеркаливания" при движении вверх
-            if (this.headCoordinates[1] < 10) {
+            if (headCoordinates[1] < 10) {
                 //Добавляем на первое место массива ячейку с координатой x+1 относительно положения головы
-                this.snakeBody.unshift(document.querySelector('[positionX = "' + this.headCoordinates[0] + '"][positionY = "' + (+this.headCoordinates[1] + 1) + '"]'));
+                this.snakeBody.unshift(document.querySelector('[positionX = "' + headCoordinates[0] + '"][positionY = "' + (+ headCoordinates[1] + 1) + '"]'));
             } else {
-                this.snakeBody.unshift(document.querySelector('[positionX = "' + this.headCoordinates[0] + '"][positionY = "1"]'));
+                this.snakeBody.unshift(document.querySelector('[positionX = "' + headCoordinates[0] + '"][positionY = "1"]'));
             }
         } else if (this.direction === 'down') {
                 //Условие "отзеркаливания"
-            if (this.headCoordinates[1] > 1) {
+            if (headCoordinates[1] > 1) {
                 //Добавляем на первое место массива ячейку с координатой x+1 относительно положения головы
-                this.snakeBody.unshift(document.querySelector('[positionX = "' + this.headCoordinates[0] + '"][positionY = "' + (+this.headCoordinates[1] - 1) + '"]'));
+                this.snakeBody.unshift(document.querySelector('[positionX = "' + headCoordinates[0] + '"][positionY = "' + (+ headCoordinates[1] - 1) + '"]'));
             } else {
-                this.snakeBody.unshift(document.querySelector('[positionX = "' + this.headCoordinates[0] + '"][positionY = "10"]'));
+                this.snakeBody.unshift(document.querySelector('[positionX = "' + headCoordinates[0] + '"][positionY = "10"]'));
             }
         }
         
