@@ -1,15 +1,17 @@
 import CoordRandom from "./CoordRandom.js";
 import Control from "./Control.js"
+
+
 class Snake extends Control {
-    constructor(direction) {
+    constructor(direction, rabbit) {
         super(direction);
         this.CoordRandom = new CoordRandom();
+        this.rabbit = rabbit;
     }
 
     draw() {
         this.coordinates = this.CoordRandom.coordSnake ();
         this.direction = 'right';
-        console.log(this.coordinates);
         //исправляем ошибку если приходит x координата = 1(вторая клетка тела не может иметь координату x = 0)
         if(this.coordinates[0] === 1) {
             this.coordinates[0] += 1;
@@ -73,15 +75,24 @@ class Snake extends Control {
                 this.snakeBody.unshift(document.querySelector('[positionX = "' + headCoordinates[0] + '"][positionY = "10"]'));
             }
         }
-        
+        // //Процесс поедания. Если голова змеи содержит класс 'rabbit', 'rabbit' исчезает а к телу змеи прибавляем 1 элемент.
+        // if (this.snakeBody[0].classList.contains('rabbit')) {
+        //     this.snakeBody[0].classList.remove('rabbit');
+        //     //Находим координаты последнего элемента змеи
+        //     let lastX = this.snakeBody[this.snakeBody.length - 1].getAttribute('positionX');
+        //     let lastY = this.snakeBody[this.snakeBody.length - 1].getAttribute('positionY');
+        //     //Дублируем последний элемент змеи
+        //     this.snakeBody.push(document.querySelector('[positionX = "' + lastX + '"][positionY = "' + lastY + '"]'));
+        //     //Отрисовываем новую мышь
+        //     this.rabbit.draw();
+        // };
         //Добавляем новой голове змеи класс snakeHead 
         this.snakeBody[0].classList.add('snakeHead');
         //Добавляем телу змеи класс snakeBody 
         for (let i = 1; i < this.snakeBody.length; i++) {
             this.snakeBody[i].classList.add('snakeBody');
         }
-        console.log('работает')
-    };
+    }; 
 
     death() {
         //логика смерти змейки

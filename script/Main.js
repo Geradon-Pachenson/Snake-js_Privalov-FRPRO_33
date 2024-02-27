@@ -20,15 +20,17 @@ class Main {
         
     } 
     
-    update() {
+    start() {
         //обновление данных при изменении
         //запускаем фун-ию движения змеи с интервалом 0.5 сек
-        this.snake.moveSnake();
+        setInterval(() => {
+            this.snake.moveSnake();
+        }, 500);
     }
 }
 
 const newMain = new Main();
 newMain.draw();
-newMain.update();
+newMain.start();
 
 export default Main;
