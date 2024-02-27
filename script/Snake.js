@@ -4,13 +4,12 @@ class Snake extends Control {
     constructor(direction) {
         super(direction);
         this.CoordRandom = new CoordRandom();
+    }
+
+    draw() {
         this.coordinates = this.CoordRandom.coordSnake ();
         this.direction = 'right';
-        this.create();        
-        
-    }
-    
-    create() {
+        console.log(this.coordinates);
         //исправляем ошибку если приходит x координата = 1(вторая клетка тела не может иметь координату x = 0)
         if(this.coordinates[0] === 1) {
             this.coordinates[0] += 1;
@@ -28,8 +27,8 @@ class Snake extends Control {
     }
 
     //Перемещение змеи
-    //Создаем функцию с интервалом вызова 0.5 сек
-    move = setInterval(() => {
+    //Создаем функцию движения змеи
+    moveSnake = () => {
         //Находим координаты головы змеи
         const headCoordinates = [this.snakeBody[0].getAttribute('positionX'), this.snakeBody[0].getAttribute('positionY')];
         //Удаляем класс snakeHead у головы
@@ -81,14 +80,11 @@ class Snake extends Control {
         for (let i = 1; i < this.snakeBody.length; i++) {
             this.snakeBody[i].classList.add('snakeBody');
         }
-    }, 500);
+        console.log('работает')
+    };
 
     death() {
         //логика смерти змейки
-    }
-
-    update() {
-        //логика изменения змейки при определнных параметрах
     }
 
 }

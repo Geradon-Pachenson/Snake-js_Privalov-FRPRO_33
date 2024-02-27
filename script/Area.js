@@ -1,12 +1,11 @@
 class Area {
     constructor() {
-        this.body = document.querySelector(".body");
-        this.body.innerHTML += '<div class="area"></div>';
-        this.area = document.querySelector(".area");
-        this.draw()
     }
 
     draw() { 
+        this.body = document.querySelector(".body");
+        this.body.innerHTML += '<div class="area"></div>';
+        this.area = document.querySelector(".area");
         //отрисовка игрового поля
         for (let i = 1; i <= 100; i++) {
             this.area.innerHTML += '<div class="cell"></div>'
