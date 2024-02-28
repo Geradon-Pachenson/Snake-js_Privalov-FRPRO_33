@@ -75,17 +75,17 @@ class Snake extends Control {
                 this.snakeBody.unshift(document.querySelector('[positionX = "' + headCoordinates[0] + '"][positionY = "10"]'));
             }
         }
-        // //Процесс поедания. Если голова змеи содержит класс 'rabbit', 'rabbit' исчезает а к телу змеи прибавляем 1 элемент.
-        // if (this.snakeBody[0].classList.contains('rabbit')) {
-        //     this.snakeBody[0].classList.remove('rabbit');
-        //     //Находим координаты последнего элемента змеи
-        //     let lastX = this.snakeBody[this.snakeBody.length - 1].getAttribute('positionX');
-        //     let lastY = this.snakeBody[this.snakeBody.length - 1].getAttribute('positionY');
-        //     //Дублируем последний элемент змеи
-        //     this.snakeBody.push(document.querySelector('[positionX = "' + lastX + '"][positionY = "' + lastY + '"]'));
-        //     //Отрисовываем новую мышь
-        //     this.rabbit.draw();
-        // };
+        //Процесс поедания. Если голова змеи содержит класс 'rabbit', 'rabbit' исчезает а к телу змеи прибавляем 1 элемент.
+        if (this.snakeBody[0].classList.contains('rabbit')) {
+            this.snakeBody[0].classList.remove('rabbit');
+            //Находим координаты последнего элемента змеи
+            let lastX = this.snakeBody[this.snakeBody.length - 1].getAttribute('positionX');
+            let lastY = this.snakeBody[this.snakeBody.length - 1].getAttribute('positionY');
+            //Дублируем последний элемент змеи
+            this.snakeBody.push(document.querySelector('[positionX = "' + lastX + '"][positionY = "' + lastY + '"]'));
+            //Отрисовываем новую мышь
+            this.rabbit.draw();
+        };
         //Добавляем новой голове змеи класс snakeHead 
         this.snakeBody[0].classList.add('snakeHead');
         //Добавляем телу змеи класс snakeBody 
@@ -97,6 +97,5 @@ class Snake extends Control {
     death() {
         //логика смерти змейки
     }
-
 }
 export default Snake;
