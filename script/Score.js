@@ -1,7 +1,7 @@
 class Score {
     constructor(currentScore, recordScore) {
-        this.recordScore = recordScore;
         this.currentScore = currentScore;
+        this.recordScore = recordScore;
     }
     //отрисовка зоны с табло подсчета очков
     draw() { 

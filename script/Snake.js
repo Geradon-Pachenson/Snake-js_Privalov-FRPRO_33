@@ -11,6 +11,7 @@ class Snake extends Control {
         this.rabbit = new EatPoint();
         this.steps = false;
         this.score = new Score(0, 0);
+        this.acceleration = 500;
     }
 
     draw() {
@@ -87,6 +88,8 @@ class Snake extends Control {
             let lastY = this.snakeBody[this.snakeBody.length - 1].getAttribute('positionY');
             //Дублируем последний элемент змеи
             this.snakeBody.push(document.querySelector('[positionX = "' + lastX + '"][positionY = "' + lastY + '"]'));
+            //Увеличиваем ускорение
+            this.acceleration += 50;
             //Увеличиваем колличество текущих очков на 10
             this.score.currentScore += 10;
             this.current = document.querySelector(".current");
@@ -117,9 +120,16 @@ class Snake extends Control {
                     this.record = document.querySelector(".record");
                     this.record.innerHTML = this.score.currentScore;
                 }
-                //создаем кнопку restart
-                this.area = document.querySelector(".area");
-                this.area.innerHTML = `<button type="button" class="btn__restart">restart</button>`;
+                //Делаем кнопку restart видимой
+                this.btn = document.querySelector(".btn__restart");
+                this.btn.style.display = "inline-flex";
+                this.rab = document.querySelector(".rabbit");
+                this.rab.style.backgroundImage = "url(../images/svg/rabbit_bunny_smile.svg)";
+
+                //Добавляем телу змеи прозрачности
+                for (let i = 1; i < this.snakeBody.length; i++) {
+                    this.snakeBody[i].style.opacity = "40%";
+                }
         };
     }
 
@@ -129,7 +139,7 @@ class Snake extends Control {
         this.setInterval = setInterval(() => {
             this.moveSnake();
             this.death();
-        }, 500);
+        }, this.acceleration);
     }
 
 }

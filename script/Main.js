@@ -6,7 +6,7 @@ import EatPoint from "./EatPoint.js";
 class Main {
     constructor() {
         this.field = new Area();
-        this.score = new Score(0);
+        this.score = new Score(0, 0);
         this.snake = new Snake();
         this.rabbit = new EatPoint();
         
@@ -27,6 +27,16 @@ class Main {
 }
 
 const newMain = new Main();
+
 newMain.draw();
 newMain.snake.startMove();
+//при нажатии на кнопку рестарт перезапускаем отрисовку и движение
+const restartBtn = document.querySelector(".btn__restart");
+restartBtn.addEventListener('click', () => {
+    newMain.draw();
+    newMain.snake.startMove();
+});
+
+
+
 export default Main;
