@@ -1,18 +1,20 @@
 class Score {
-    constructor(score) {
-        //создаем начальное колличество очков
-        this.score = score;
+    constructor() {
     }
 
-    draw() {
-        //отрисовка табло с очками
-    }
+    draw() { 
+        this.body = document.querySelector(".body");
+        this.body.innerHTML += '<div class="scoreboard"></div>';
+        this.scoreboard = document.querySelector(".scoreboard");
+        //отрисовка табло подсчета очков
+        } 
+    
 
-    increase() {
-        //изменение колличества очков и перерисовка на табло
-        this.score += 10;
-        this.draw();
-    }
+    // increase() {
+    //     //изменение колличества очков и перерисовка на табло
+    //     this.scoreboard += 10;
+    //     this.draw();
+    // }
 }
 
 export default Score;

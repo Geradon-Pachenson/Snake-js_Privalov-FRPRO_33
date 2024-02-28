@@ -6,31 +6,26 @@ import EatPoint from "./EatPoint.js";
 class Main {
     constructor() {
         this.field = new Area();
+        this.score = new Score(0);
         this.snake = new Snake();
         this.rabbit = new EatPoint();
-        this.score = new Score(0);
     }
 
 
     draw() {
         //отрисовка всех частей игры
         this.field.draw();
+        this.score.draw();
         this.snake.draw();
-        this.rabbit.draw();
+        setTimeout(() => {
+            this.rabbit.draw();
+        }, 1000);
         
     } 
     
-    start() {
-        //обновление данных при изменении
-        //запускаем фун-ию движения змеи с интервалом 0.5 сек
-        setInterval(() => {
-            this.snake.moveSnake();
-        }, 500);
-    }
 }
 
 const newMain = new Main();
 newMain.draw();
-newMain.start();
-
+newMain.snake.startMove();
 export default Main;

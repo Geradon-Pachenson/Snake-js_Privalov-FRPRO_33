@@ -1,12 +1,14 @@
 import CoordRandom from "./CoordRandom.js";
 import Control from "./Control.js"
+import EatPoint from "./EatPoint.js";
 
 
 class Snake extends Control {
-    constructor(direction, rabbit) {
-        super(direction);
+    constructor(direction, steps) {
+        super(direction, steps);
         this.CoordRandom = new CoordRandom();
-        this.rabbit = rabbit;
+        this.rabbit = new EatPoint();
+        this.steps = false;
     }
 
     draw() {
@@ -84,18 +86,39 @@ class Snake extends Control {
             //Дублируем последний элемент змеи
             this.snakeBody.push(document.querySelector('[positionX = "' + lastX + '"][positionY = "' + lastY + '"]'));
             //Отрисовываем новую мышь
-            this.rabbit.draw();
+            setTimeout(() => {
+                this.rabbit.draw();
+            }, 500);
         };
+
+
         //Добавляем новой голове змеи класс snakeHead 
         this.snakeBody[0].classList.add('snakeHead');
         //Добавляем телу змеи класс snakeBody 
         for (let i = 1; i < this.snakeBody.length; i++) {
             this.snakeBody[i].classList.add('snakeBody');
         }
+
+        this.steps = true;
     }; 
 
     death() {
-        //логика смерти змейки
+        //Логика смерти змейки
+        //Если голова змеи содержит класс 'snakeBody'. Останавливаем сетинтервал и Записываем колличество очков в память 
+        //(если игра запущена впервые), либо сравниваем с ранее записанным результатом и обновляем рекорд при необхоимости.
+        if (this.snakeBody[0].classList.contains('snakeBody')) {
+                clearInterval(this.setInterval);
+        };
     }
+
+    startMove() {
+        //обновление данных при изменении
+        //запускаем фун-ию движения змеи с интервалом 0.5 сек
+        this.setInterval = setInterval(() => {
+            this.moveSnake();
+            this.death();
+        }, 200);
+    }
+
 }
 export default Snake;
