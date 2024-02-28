@@ -1,14 +1,27 @@
 class Score {
-    constructor() {
+    constructor(currentScore, recordScore) {
+        this.recordScore = recordScore;
+        this.currentScore = currentScore;
     }
-
+    //отрисовка зоны с табло подсчета очков
     draw() { 
         this.body = document.querySelector(".body");
-        this.body.innerHTML += '<div class="scoreboard"></div>';
-        this.scoreboard = document.querySelector(".scoreboard");
-        //отрисовка табло подсчета очков
+        this.body.innerHTML = `<div class="head__container"></div>`;
+        this.head__container = document.querySelector('.head__container');
+        this.head__container.innerHTML = `<p>лучший результат:</p>` + `<span class="record"></span>` + `<p>очки:</p>` + `<span class="current"></span>`;
+        this.record = document.querySelector(".record");
+        this.current = document.querySelector(".current");
+        this.record = document.querySelector(".record");
+        this.record.innerHTML = this.recordScore;
+        this.current = document.querySelector(".current");
+        this.current.innerHTML = this.currentScore;
         } 
     
+    // fixScore() {
+    //     this._currentScore += 1;
+    //     this.setRecord();
+    //     this.create();
+    // }
 
     // increase() {
     //     //изменение колличества очков и перерисовка на табло

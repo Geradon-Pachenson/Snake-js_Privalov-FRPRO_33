@@ -1,6 +1,7 @@
 import CoordRandom from "./CoordRandom.js";
 import Control from "./Control.js"
 import EatPoint from "./EatPoint.js";
+import Score from "./Score.js";
 
 
 class Snake extends Control {
@@ -9,6 +10,7 @@ class Snake extends Control {
         this.CoordRandom = new CoordRandom();
         this.rabbit = new EatPoint();
         this.steps = false;
+        this.score = new Score(0, 0);
     }
 
     draw() {
@@ -85,12 +87,15 @@ class Snake extends Control {
             let lastY = this.snakeBody[this.snakeBody.length - 1].getAttribute('positionY');
             //Дублируем последний элемент змеи
             this.snakeBody.push(document.querySelector('[positionX = "' + lastX + '"][positionY = "' + lastY + '"]'));
+            //Увеличиваем колличество текущих очков на 10
+            this.score.currentScore += 10;
+            this.current = document.querySelector(".current");
+            this.current.innerHTML = this.score.currentScore;
             //Отрисовываем новую мышь
             setTimeout(() => {
                 this.rabbit.draw();
             }, 500);
         };
-
 
         //Добавляем новой голове змеи класс snakeHead 
         this.snakeBody[0].classList.add('snakeHead');
@@ -108,6 +113,13 @@ class Snake extends Control {
         //(если игра запущена впервые), либо сравниваем с ранее записанным результатом и обновляем рекорд при необхоимости.
         if (this.snakeBody[0].classList.contains('snakeBody')) {
                 clearInterval(this.setInterval);
+                if (this.score.recordScore < this.score.currentScore) {
+                    this.record = document.querySelector(".record");
+                    this.record.innerHTML = this.score.currentScore;
+                }
+                //создаем кнопку restart
+                this.area = document.querySelector(".area");
+                this.area.innerHTML = `<button type="button" class="btn__restart">restart</button>`;
         };
     }
 
@@ -117,7 +129,7 @@ class Snake extends Control {
         this.setInterval = setInterval(() => {
             this.moveSnake();
             this.death();
-        }, 200);
+        }, 500);
     }
 
 }

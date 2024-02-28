@@ -9,13 +9,14 @@ class Main {
         this.score = new Score(0);
         this.snake = new Snake();
         this.rabbit = new EatPoint();
+        
     }
 
 
     draw() {
         //отрисовка всех частей игры
-        this.field.draw();
         this.score.draw();
+        this.field.draw();
         this.snake.draw();
         setTimeout(() => {
             this.rabbit.draw();
