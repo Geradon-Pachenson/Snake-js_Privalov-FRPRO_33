@@ -7,7 +7,7 @@ class Main {
     constructor() {
         this.field = new Area();
         this.score = new Score(0, 0);
-        this.snake = new Snake();
+        this.snake = new Snake('right', false, 500);
         this.rabbit = new EatPoint();
         
     }

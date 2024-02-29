@@ -5,13 +5,13 @@ import Score from "./Score.js";
 
 
 class Snake extends Control {
-    constructor(direction, steps) {
+    constructor(direction, steps, acceleration) {
         super(direction, steps);
         this.CoordRandom = new CoordRandom();
         this.rabbit = new EatPoint();
-        this.steps = false;
+        this.steps = steps;
         this.score = new Score(0, 0);
-        this.acceleration = 500;
+        this.acceleration = acceleration;
     }
 
     draw() {
@@ -88,8 +88,6 @@ class Snake extends Control {
             let lastY = this.snakeBody[this.snakeBody.length - 1].getAttribute('positionY');
             //Дублируем последний элемент змеи
             this.snakeBody.push(document.querySelector('[positionX = "' + lastX + '"][positionY = "' + lastY + '"]'));
-            //Увеличиваем ускорение
-            this.acceleration += 50;
             //Увеличиваем колличество текущих очков на 10
             this.score.currentScore += 10;
             this.current = document.querySelector(".current");
@@ -98,6 +96,9 @@ class Snake extends Control {
             setTimeout(() => {
                 this.rabbit.draw();
             }, 500);
+             //Увеличиваем ускорение
+            this.acceleration += 100;
+            console.log(this.acceleration);
         };
 
         //Добавляем новой голове змеи класс snakeHead 
@@ -130,6 +131,7 @@ class Snake extends Control {
                 for (let i = 1; i < this.snakeBody.length; i++) {
                     this.snakeBody[i].style.opacity = "40%";
                 }
+                this.acceleration = 500;
         };
     }
 
