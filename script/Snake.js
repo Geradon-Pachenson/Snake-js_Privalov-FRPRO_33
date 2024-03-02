@@ -9,9 +9,10 @@ class Snake extends Control {
         super(direction, steps);
         this.CoordRandom = new CoordRandom();
         this.rabbit = new EatPoint();
-        this.steps = steps;
-        this.score = new Score(0, 0);
+        this.score = new Score(0);
+        this.direction = direction;
         this.acceleration = acceleration;
+        this.steps = steps;
     }
 
     draw() {
@@ -35,7 +36,7 @@ class Snake extends Control {
 
     //Перемещение змеи
     //Создаем функцию движения змеи
-    moveSnake = () => {
+    #moveSnake = () => {
         //Находим координаты головы змеи
         const headCoordinates = [this.snakeBody[0].getAttribute('positionX'), this.snakeBody[0].getAttribute('positionY')];
         //Удаляем класс snakeHead у головы
@@ -44,7 +45,7 @@ class Snake extends Control {
         this.snakeBody[this.snakeBody.length - 1].classList.remove('snakeBody');
         //Временно удаляем последний элемент из массива со змеей
         this.snakeBody.pop();
-        
+
         this.setControl();
 
         if (this.direction === 'right') {
@@ -88,17 +89,18 @@ class Snake extends Control {
             let lastY = this.snakeBody[this.snakeBody.length - 1].getAttribute('positionY');
             //Дублируем последний элемент змеи
             this.snakeBody.push(document.querySelector('[positionX = "' + lastX + '"][positionY = "' + lastY + '"]'));
+            
             //Увеличиваем колличество текущих очков на 10
-            this.score.currentScore += 10;
-            this.current = document.querySelector(".current");
-            this.current.innerHTML = this.score.currentScore;
+            console.log(`Перед движением - ${this.score.currentScore}`);
+            this.score.addScore();
             //Отрисовываем новую мышь
             setTimeout(() => {
                 this.rabbit.draw();
             }, 500);
-             //Увеличиваем ускорение
-            this.acceleration += 100;
-            console.log(this.acceleration);
+            //Увеличиваем ускорение на 5
+            clearInterval(this.setInterval);
+            this.acceleration -= 5;
+            this.startMove();
         };
 
         //Добавляем новой голове змеи класс snakeHead 
@@ -111,27 +113,22 @@ class Snake extends Control {
         this.steps = true;
     }; 
 
-    death() {
+    #death() {
         //Логика смерти змейки
         //Если голова змеи содержит класс 'snakeBody'. Останавливаем сетинтервал и Записываем колличество очков в память 
         //(если игра запущена впервые), либо сравниваем с ранее записанным результатом и обновляем рекорд при необхоимости.
         if (this.snakeBody[0].classList.contains('snakeBody')) {
-                clearInterval(this.setInterval);
-                if (this.score.recordScore < this.score.currentScore) {
-                    this.record = document.querySelector(".record");
-                    this.record.innerHTML = this.score.currentScore;
-                }
-                //Делаем кнопку restart видимой
-                this.btn = document.querySelector(".btn__restart");
-                this.btn.style.display = "inline-flex";
-                this.rab = document.querySelector(".rabbit");
-                this.rab.style.backgroundImage = "url(../images/svg/rabbit_bunny_smile.svg)";
-
-                //Добавляем телу змеи прозрачности
-                for (let i = 1; i < this.snakeBody.length; i++) {
-                    this.snakeBody[i].style.opacity = "40%";
-                }
-                this.acceleration = 500;
+            clearInterval(this.setInterval);
+            //Делаем кнопку restart видимой
+            this.btn = document.querySelector(".btn__restart");
+            this.btn.style.display = "inline-flex";
+            //Кролик улыбается при неудачи змеи
+            this.rab = document.querySelector(".rabbit");
+            this.rab.classList.add("smile_rabbit");
+            //Добавляем телу змеи прозрачности
+            for (let i = 1; i < this.snakeBody.length; i++) {
+                this.snakeBody[i].classList.add("dead_snake");
+            }
         };
     }
 
@@ -139,8 +136,8 @@ class Snake extends Control {
         //обновление данных при изменении
         //запускаем фун-ию движения змеи с интервалом 0.5 сек
         this.setInterval = setInterval(() => {
-            this.moveSnake();
-            this.death();
+            this.#moveSnake();
+            this.#death();
         }, this.acceleration);
     }
 
