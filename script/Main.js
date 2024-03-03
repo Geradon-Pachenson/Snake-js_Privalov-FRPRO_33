@@ -11,9 +11,9 @@ class Main {
         this.rabbit = new EatPoint();
     }
 
-
     drawConst() {
         //отрисовка игрового поля
+        this.score.draw();
         this.field.draw();
     }
     
@@ -26,13 +26,14 @@ class Main {
     }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
     const newMain = new Main();
-    newMain.score.getRecord();
-    newMain.score.resetScore();
-    console.log(`1 - ${newMain.score.currentScore}`);
+    
     //Запускаем функцию отрисовки постоянных элементов
     newMain.drawConst();
+    //Записываем очки в соответствующие окна
+    newMain.score.getScores();
+    newMain.score.updateRecord();
+    newMain.score.writeRecord();
     //По клику на кнопку старт запускаем движение
     const startBtn = document.querySelector(".btn__start");
     startBtn.addEventListener('click', () => {
@@ -51,14 +52,16 @@ document.addEventListener("DOMContentLoaded", () => {
             cell.classList.remove("smile_rabbit");
             cell.classList.remove("dead_snake");
         });
-        console.log('777');
-        newMain.score.updateRecord();
-        newMain.score.resetScore ();
-        console.log(`restartBtn - ${newMain.score.currentScore}`);
+        newMain.score.getScores();
         newMain.drawVar();
         newMain.snake.startMove();
         restartBtn.style.display = "none"
     });
-})
+
+    //при нажатии на иконку змеи обнуляем рекорд
+    const clearRecord = document.querySelector(".btn__clear");
+    clearRecord.addEventListener('click', () => {
+        newMain.score.resetRecord();
+        });
 
 export default Main;

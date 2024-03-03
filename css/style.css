@@ -33,13 +33,19 @@ body {
 
 .record,
 .current {
-    min-width: 100px;
+    min-width: 75px;
     min-height: 50px;
     margin: 0 auto;
     padding: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: "NunitoSans-Italic", sans-serif;
+    font-style: italic;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
     background-color: #4947476e;
     -webkit-box-shadow: 0px 0px 29px 12px rgba(16, 52, 66, 0.3);
     -moz-box-shadow: 0px 0px 29px 12px rgba(16, 52, 66, 0.3);
@@ -79,6 +85,8 @@ body {
 
 .body p,
 .body span {
+    display: flex;
+    align-items: center;
     color: #E3B873;
     font-family: "YesevaOne-Regular", serif;
     font-size: 20px;
@@ -86,10 +94,23 @@ body {
     letter-spacing: 0px;
     text-transform: uppercase;
     max-width: 5.7em;
+    background-color: rgb(173 173 173 / 21%);
+    box-shadow: 0px 0px 25px 12px rgb(173 173 173 / 27%);
 }
 
 .body span {
     color: #9f7f4d;
+}
+
+.btn__clear {
+    display: block;
+    margin: -40px 10px -40px -5px;
+    min-width: 80px;
+    min-height: 80px;
+    background-image: url(../images/svg/cobra.svg);
+    background-size: cover;
+    opacity: 0.7;
+    cursor: pointer;
 }
 
 .area {

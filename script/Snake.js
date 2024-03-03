@@ -91,7 +91,6 @@ class Snake extends Control {
             this.snakeBody.push(document.querySelector('[positionX = "' + lastX + '"][positionY = "' + lastY + '"]'));
             
             //Увеличиваем колличество текущих очков на 10
-            console.log(`Перед движением - ${this.score.currentScore}`);
             this.score.addScore();
             //Отрисовываем новую мышь
             setTimeout(() => {
@@ -129,6 +128,10 @@ class Snake extends Control {
             for (let i = 1; i < this.snakeBody.length; i++) {
                 this.snakeBody[i].classList.add("dead_snake");
             }
+            this.acceleration = 500;
+            this.score.writeRecord();
+            this.score.resetScore();
+            this.score.updateRecord();
         };
     }
 

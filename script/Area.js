@@ -7,7 +7,7 @@ class Area {
         this.body = document.querySelector(".body");
         this.body.innerHTML += '<div class="area"></div>';
         this.area = document.querySelector(".area");
-        //создаем кнопки start и restart. Делаем restart невидимой.
+        //создаем  кнопки start и restart. Делаем restart невидимой.
         this.area = document.querySelector(".area");
         this.area.innerHTML = `<button type="button" class="btn__start">start</button>`;
         this.area.innerHTML += `<button type="button" class="btn__restart">restart</button>`;
